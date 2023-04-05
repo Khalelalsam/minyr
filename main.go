@@ -1,4 +1,5 @@
 package main
+
 import (  "bufio" 
  "fmt" 
  "log" 
@@ -8,11 +9,13 @@ import (  "bufio"
 
 func main() {
    var input string 
- lines :=opneoglese() 
+ lines :=opnelese() 
+
  scanner := bufio.NewScanner(os.Stdin)  
  for scanner.Scan() {   input = scanner.Text()
    if input == "q" || input == "exit" { 
-   fmt.Println("exit")    os.Exit(0)
+   fmt.Println("exit")
+    os.Exit(0)
 
 } else if input == "co" {
     fmt.Println("Konverterer alle målingene gitt i grader Celsius til grader Fahrenheit.")  
@@ -21,7 +24,7 @@ func main() {
 	var uinput string 
 	fmt.Scan(&uinput)
         scanner.Scan()
-     if uinput == "yes" { newfile, err := os.Create("neww.csv")     
+     if uinput == "yes" { newfile, err := os.Create("kjevik-temp-fahr-20220318-20230318.csv")     
       if err != nil { 
       log.Println(err)      }
 
@@ -86,11 +89,14 @@ temp, err := strconv.ParseFloat(fields[len(fields)-1], 64)
     fahrenheit := float64(temp*9/5 + 32)  
     sum2 += fahrenheit
 
-}      fmt.Printf("gjennomsnittstemperatur (F) er : %0.2f", sum2/16754)  
-   }    } else {    fmt.Println("Venligst velg convert, average eller exit:")   }  }  }
+}
+      fmt.Printf("gjennomsnittstemperatur (F) er : %0.2f", sum2/16754)  
+   } 
+   } else { 
+   fmt.Println("Venligst velg convert, average eller exit:")   }  }  }
 
 
-func åpneoglese() []string {  
+func opnelese() []string {  
 var lines []string
   fill, err := os.Open("kjevik-temp-celsius-20220318-20230318.csv") 
  if err != nil {   log.Println(err)   }
@@ -99,5 +105,6 @@ defer fill.Close()
   scanner := bufio.NewScanner(fill)
    for scanner.Scan() { 
   lines = append(lines, scanner.Text()) 
-  }  return lines
+  }
+   return lines
  }
