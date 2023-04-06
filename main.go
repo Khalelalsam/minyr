@@ -1,11 +1,15 @@
 package main
 
-import (  "bufio" 
- "fmt" 
- "log" 
- "os" 
- "strconv" 
- "strings"    )
+import (
+	"bufio"
+	"fmt"
+
+	"log"
+	"os"
+	"strconv"
+	"strings"
+)
+
 
 func main() {
    var input string 
@@ -26,7 +30,9 @@ func main() {
         scanner.Scan()
      if uinput == "yes" { newfile, err := os.Create("kjevik-temp-fahr-20220318-20230318.csv")     
       if err != nil { 
-      log.Println(err)      }
+      log.Println(err)   
+
+      }
 
       defer newfile.Close()
       writer := bufio.NewWriter(newfile)
@@ -55,7 +61,8 @@ if lastIndex != -1 {
       writer.Flush()       }
 
 }     } else {     
-fmt.Print("skal ikke copiere")
+
+    fmt.Print("skal ikke copiere")
     }} else if input == "avr" { 
     fmt.Print("c or f")
     var uinput string
@@ -84,9 +91,16 @@ if err != nil {
 
 temp, err := strconv.ParseFloat(fields[len(fields)-1], 64) 
       if err != nil {
-       log.Println(err) 
-      continue      }   
-    fahrenheit := float64(temp*9/5 + 32)  
+      
+      log.Println(err) 
+      continue     
+
+      }   
+
+
+
+    fahrenheit := conv.CelsiusToFahrenheit(temp)
+
     sum2 += fahrenheit
 
 }
