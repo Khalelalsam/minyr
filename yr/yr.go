@@ -6,12 +6,13 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/khalelalsam/funtemps/conv"
+	"funtemps/conv"
 )
 
 func CelsiusToFahrenheitString(celsius string) (string, error) {
 	var fahrFloat float64
 	var err error
+
 	if celsiusFloat, err := strconv.ParseFloat(celsius, 64); err == nil {
 		fahrFloat = conv.CelsiusToFahrenheit(celsiusFloat)
 	}
@@ -37,5 +38,5 @@ func CelsiusToFahrenheitLine(line string) (string, error) {
 	}
 	return strings.Join(dividedString, ";"), nil
 
-	return "Kjevik;SN39040;18.03.2022 01:50;42.8", err
+	//return "Kjevik;SN39040;18.03.2022 01:50;42.8", err
 }
