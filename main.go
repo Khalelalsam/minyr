@@ -12,7 +12,9 @@ import (
 
 func main() {
 	var input string
-	lines := opnelese()
+	lines := Opnelese()
+	fmt.Print("hvelg con eller avr")
+	fmt.Print(len(lines))
 
 	scanner := bufio.NewScanner(os.Stdin)
 	for scanner.Scan() {
@@ -22,13 +24,13 @@ func main() {
 			os.Exit(0)
 
 		} else if input == "co" {
-			fmt.Println("Konverterer alle målingene gitt i grader Celsius til grader Fahrenheit.")
-			fmt.Print("you want new file? yes or no")
+			//fmt.Println("Konverterer alle målingene gitt i grader Celsius til grader Fahrenheit.")
+			fmt.Print("you want new file? j for yes or n for no ---> ")
 
 			var uinput string
 			fmt.Scan(&uinput)
 			scanner.Scan()
-			if uinput == "yes" {
+			if uinput == "j" {
 				newfile, err := os.Create("kjevik-temp-fahr-20220318-20230318.csv")
 				if err != nil {
 					log.Println(err)
@@ -39,32 +41,49 @@ func main() {
 				writer := bufio.NewWriter(newfile)
 				defer writer.Flush()
 
-				for i := 1; i <= 16754; i++ {
+				for i := 0; i <= 16755; i++ {
 					line := lines[i]
 					fields := strings.Split(line, ";")
 
-					temp, err := strconv.ParseFloat(fields[len(fields)-1], 64)
-					if err != nil {
-						//log.Println(err)
-						continue
-					}
+					if len(fields) == 2 {
 
-					fahrenheit := conv.CelsiusToFahrenheit(temp)
-					ls := fmt.Sprintf("%2.1f\n", fahrenheit)
-
-					lastIndex := strings.LastIndex(line, ";")
-					if lastIndex != -1 {
-						line = line[:lastIndex]
-						line += ";"
-
-						ls2 := fmt.Sprint(line, ls)
-						writer.WriteString(ls2)
+						writer.WriteString("Data er basert på gyldig data (per 18.03.2023) (CC BY 4.0) fra Meteorologisk institutt (MET);endringen er gjort av khalel alsamael")
 						writer.Flush()
-					}
+						continue
 
+					} else if len(fields) == 4 && fields[3] == "Lufttemperatur" {
+
+						writer.WriteString("Navn;Stasjon;Tid(norsk normaltid);Lufttemperatur\n")
+
+						continue
+
+					} else {
+
+						temp, err := strconv.ParseFloat(fields[len(fields)-1], 64)
+						if err != nil {
+
+							//log.Println(err)
+							continue
+						}
+
+						fahrenheit := conv.CelsiusToFahrenheit(temp)
+						ls := fmt.Sprintf("%2.1f\n", fahrenheit)
+
+						lastIndex := strings.LastIndex(line, ";")
+						if lastIndex != -1 {
+							line = line[:lastIndex]
+							line += ";"
+
+							//lastline(lines)
+							ls2 := fmt.Sprint(line, ls)
+							writer.WriteString(ls2)
+							writer.Flush()
+						}
+
+					}
 				}
 			} else {
-
+				fmt.Print(lines[0])
 				fmt.Print("skal ikke copiere")
 			}
 		} else if input == "avr" {
@@ -115,7 +134,7 @@ func main() {
 	}
 }
 
-func opnelese() []string {
+func Opnelese() []string {
 	var lines []string
 	fill, err := os.Open("kjevik-temp-celsius-20220318-20230318.csv")
 	if err != nil {
@@ -127,5 +146,6 @@ func opnelese() []string {
 	for scanner.Scan() {
 		lines = append(lines, scanner.Text())
 	}
+	lines[16755] = "Data er basert på gyldig data (per 18.03.2023) (CC BY 4.0) fra Meteorologisk institutt (MET);endringen er gjort av khalel alsamael"
 	return lines
 }

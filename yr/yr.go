@@ -3,10 +3,10 @@ package yr
 import (
 	"errors"
 	"fmt"
+	"funtemps/conv"
+
 	"strconv"
 	"strings"
-
-	"funtemps/conv"
 )
 
 func CelsiusToFahrenheitString(celsius string) (string, error) {
@@ -33,10 +33,22 @@ func CelsiusToFahrenheitLine(line string) (string, error) {
 		if err != nil {
 			return "", err
 		}
+
 	} else {
 		return "", errors.New("linje har ikke forventet format")
 	}
 	return strings.Join(dividedString, ";"), nil
 
 	//return "Kjevik;SN39040;18.03.2022 01:50;42.8", err
+}
+func Studentname(line string) string {
+
+	dividedString := strings.Split(line, ";")
+
+	if len(dividedString) == 4 && dividedString[3] == "" && dividedString[2] == "" && dividedString[1] == "" {
+		return "Data er basert på gyldig data (per 18.03.2023) (CC BY 4.0) fra Meteorologisk institutt (MET);endringen er gjort av khalel alsamael"
+	} else {
+		return ""
+	}
+
 }
