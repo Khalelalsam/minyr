@@ -28,7 +28,7 @@ func main() {
 
 			var uinput string
 			fmt.Scan(&uinput)
-			scanner.Scan()
+
 			if uinput == "j" {
 				newfile, err := os.Create("kjevik-temp-fahr-20220318-20230318.csv")
 				if err != nil {
@@ -78,6 +78,7 @@ func main() {
 							ls2 := fmt.Sprint(line, ls)
 							writer.WriteString(ls2)
 							writer.Flush()
+
 						}
 
 					}
