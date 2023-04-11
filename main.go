@@ -13,8 +13,7 @@ import (
 func main() {
 	var input string
 	lines := Opnelese()
-	fmt.Print("hvelg con eller avr")
-	fmt.Print(len(lines))
+	fmt.Print("velg co eller avr")
 
 	scanner := bufio.NewScanner(os.Stdin)
 	for scanner.Scan() {
@@ -34,6 +33,7 @@ func main() {
 				newfile, err := os.Create("kjevik-temp-fahr-20220318-20230318.csv")
 				if err != nil {
 					log.Println(err)
+					continue
 
 				}
 
@@ -62,7 +62,7 @@ func main() {
 						temp, err := strconv.ParseFloat(fields[len(fields)-1], 64)
 						if err != nil {
 
-							//log.Println(err)
+							log.Println(err)
 							continue
 						}
 
@@ -82,10 +82,15 @@ func main() {
 
 					}
 				}
-			} else {
-				fmt.Print(lines[0])
+				fmt.Println("Konverterer alle målingene gitt i grader Celsius til grader Fahrenheit.")
+			} else if uinput == "n" {
+
 				fmt.Print("skal ikke copiere")
+			} else {
+				fmt.Print("bare j eller n")
+
 			}
+
 		} else if input == "avr" {
 			fmt.Print("c or f")
 			var uinput string
