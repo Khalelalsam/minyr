@@ -13,7 +13,7 @@ import (
 func main() {
 	var input string
 	lines := Opnelese()
-	fmt.Print("velg co eller avr")
+	fmt.Print("velg convert eller average")
 
 	scanner := bufio.NewScanner(os.Stdin)
 	for scanner.Scan() {
@@ -22,9 +22,9 @@ func main() {
 			fmt.Println("exit")
 			os.Exit(0)
 
-		} else if input == "co" {
+		} else if input == "convert" {
 			//fmt.Println("Konverterer alle målingene gitt i grader Celsius til grader Fahrenheit.")
-			fmt.Print("you want new file? j for yes or n for no ---> ")
+			fmt.Print("hvil du ha ny fil? j for ja or n for nei ---> ")
 
 			var uinput string
 			fmt.Scan(&uinput)
@@ -83,20 +83,20 @@ func main() {
 
 					}
 				}
-				fmt.Println("Konverterer alle målingene gitt i grader Celsius til grader Fahrenheit.")
+				fmt.Println("ferdig Konvertere alle lingene fra grader Celsius til grader Fahrenheit.velg average eller exit:")
 			} else if uinput == "n" {
 
-				fmt.Print("skal ikke copiere")
+				fmt.Print("ok,skal ikke gjøre noe")
 			} else {
 				fmt.Print("bare j eller n")
 
 			}
 
-		} else if input == "avr" {
+		} else if input == "average" {
 			fmt.Print("c or f")
 			var uinput string
 			fmt.Scan(&uinput)
-			scanner.Scan()
+
 			if uinput == "c" {
 				sum := 0.0
 
