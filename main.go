@@ -13,7 +13,7 @@ import (
 func main() {
 	var input string
 	lines := Opnelese()
-	fmt.Print("velg convert eller average")
+	fmt.Print("velg convert eller average \n")
 
 	scanner := bufio.NewScanner(os.Stdin)
 	for scanner.Scan() {
