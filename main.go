@@ -86,7 +86,7 @@ func main() {
 				fmt.Println("ferdig Konvertere alle lingene fra grader Celsius til grader Fahrenheit.velg average eller exit:")
 			} else if uinput == "n" {
 
-				fmt.Print("ok,skal ikke gjøre noe")
+				fmt.Print("ok,skal ikke gjøre noe \n")
 			} else {
 				fmt.Print("bare j eller n")
 
